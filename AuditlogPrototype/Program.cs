@@ -1,4 +1,5 @@
 using Audit.Core;
+using Audit.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,12 @@ Audit.Core.Configuration.Setup()
         .ConnectionString("mongodb://localhost:27017")
         .Database("audit")
         .Collection("Event"));
+ 
+app.UseAuditMiddleware(_ => _
+    .WithEventType("{controller}/{action} ({verb})")
+    .IncludeHeaders()
+    .IncludeRequestBody()
+    .IncludeResponseBody());
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

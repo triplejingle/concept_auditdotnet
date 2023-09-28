@@ -20,7 +20,7 @@ public class WeatherForecastController : ControllerBase
     }
    
     [HttpPost(Name = "GetWeatherForecast")]
-    [AuditApi(EventTypeName = "{controller}/{action} ({verb})", IncludeHeaders = true,IncludeRequestBody = true, IncludeResponseBody=true)]
+
     public IEnumerable<WeatherForecast> Get([FromBody] string peanut)
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
